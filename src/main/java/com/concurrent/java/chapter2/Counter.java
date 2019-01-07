@@ -16,6 +16,7 @@ public class Counter {
     private int i = 0;
 
     public static void main(String[] args) {
+
         final Counter cas = new Counter();
         List<Thread> ts = new ArrayList<>(600);
         long start = System.currentTimeMillis();
@@ -48,6 +49,7 @@ public class Counter {
 
     //使用CAS实现线程安全计数器
     private void safeCount() {
+
         for (; ; ) {
             int i = atomic1.get();
             boolean suc = atomic1.compareAndSet(i, ++i);
