@@ -1,4 +1,4 @@
-package com.concurrent.java.chapter2;
+package com.concurrent.chapter2;
 
 import java.util.ArrayList;
 import java.util.List;

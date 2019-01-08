@@ -1,4 +1,4 @@
-package com.concurrent.java.chapter1;
+package com.concurrent.chapter1;
 
 /**
  * @Author jiangyunxiong

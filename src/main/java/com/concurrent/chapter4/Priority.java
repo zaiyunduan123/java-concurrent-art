@@ -1,4 +1,4 @@
-package com.concurrent.java.chapter4;
+package com.concurrent.chapter4;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
