@@ -9,7 +9,7 @@ import java.util.concurrent.locks.Condition;
  * @Date: 2019/1/8 14:58
  * @Description: 自定义同步器-独占锁
  * <p>
- * 同步器提供的模板方法分为3类：独占式获取与释放同步状态、共享式获取与释放同步状态和查询同步队列的等待线程情况
+ *
  */
 public class Mutex {
     //静态内部类，自定义同步器
@@ -26,8 +26,6 @@ public class Mutex {
         }
 
         //释放锁，将状态设置为0
-
-
         @Override
         protected boolean tryRelease(int arg) {
             if (getState() == 0) {
