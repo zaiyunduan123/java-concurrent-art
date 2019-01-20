@@ -12,11 +12,11 @@
 
 # 7、Java中的13个原子操作类
 
+![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/7-1.png)
+
 ## 原子更新基本类型
 
 atomic包里面一共提供了13个类，分为4种类型，分别是：原子更新基本类型，原子更新数组，原子更新引用，原子更新属性，这13个类都是使用Unsafe实现的包装类。
-
-![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/7-1.png)
 
 AtomicInteger的常用方法有：
 1. int addAndGet(int delta)：以原子的方式将输入的值与实例中的值相加，并把结果返回
