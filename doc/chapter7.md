@@ -19,11 +19,11 @@ atomic包里面一共提供了13个类，分为4种类型，分别是：原子�
 ![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/7-1.png)
 
 AtomicInteger的常用方法有：
-1.int addAndGet(int delta)：以原子的方式将输入的值与实例中的值相加，并把结果返回
-2.boolean compareAndSet(int expect, int update)：如果输入值等于预期值，以原子的方式将该值设置为输入的值
-3.final int getAndIncrement()：以原子的方式将当前值加1，并返回加1之前的值
-4.void lazySet(int newValue)：最终会设置成newValue，使用lazySet设置值后，可能导致其他线程在之后的一小段时间内还是可以读到旧的值。
-5.int getAndSet(int newValue)：以原子的方式将当前值设置为newValue,并返回设置之前的旧值
+1. int addAndGet(int delta)：以原子的方式将输入的值与实例中的值相加，并把结果返回
+2. boolean compareAndSet(int expect, int update)：如果输入值等于预期值，以原子的方式将该值设置为输入的值
+3. final int getAndIncrement()：以原子的方式将当前值加1，并返回加1之前的值
+4. void lazySet(int newValue)：最终会设置成newValue，使用lazySet设置值后，可能导致其他线程在之后的一小段时间内还是可以读到旧的值。
+5. int getAndSet(int newValue)：以原子的方式将当前值设置为newValue,并返回设置之前的旧值
 
 
 

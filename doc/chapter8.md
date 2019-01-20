@@ -20,7 +20,7 @@
 
 # 8、Java中的并发工具类
 
-## 等待多线程完成的CountDownLatch
+## 等待多线程完成CountDownLatch
 CountDownLatch这个类，作用感觉和join很像，首先来看一下join，join用于让当前执行线程等待join线程执行结束，其实现原理是不停检查join线程是否存活，如果join线程存活则让当前线程永远等待。
 
 CountDownLatch是一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。 
@@ -83,8 +83,8 @@ protected boolean tryReleaseShared(int var1) {
 
 countDown是释放锁，最终会调用到tryReleaseShared。
 ```java
-public void await() throws InterruptedException {
-        sync.acquireSharedInterruptibly(1);
+   public void countDown() {
+        sync.releaseShared(1);
     }
 ```
 
@@ -109,10 +109,8 @@ CyclicBarrier要做的事情是，让一组线程到达一个屏障（也可以�
 在CyclicBarrier类的内部有一个计数器，每个线程在到达屏障点的时候都会调用await方法将自己阻塞，此时计数器会减1，当计数器减为0的时候所有因调用await方法而被阻塞的线程将被唤醒。
 
 CyclicBarrier内部是通过条件队列trip来对线程进行阻塞的，并且其内部维护了两个int型的变量parties和count
-
-parties表示每次拦截的线程数，该值在构造时进行赋值。
-
-count是内部计数器，它的初始值和parties相同，以后随着每次await方法的调用而减1，直到减为0就将所有线程唤醒。
+1. parties表示每次拦截的线程数，该值在构造时进行赋值。
+2. count是内部计数器，它的初始值和parties相同，以后随着每次await方法的调用而减1，直到减为0就将所有线程唤醒。
 
 ```java
 private int dowait(boolean timed, long nanos) 
@@ -198,10 +196,8 @@ throws InterruptedException, BrokenBarrierException, TimeoutException {
 ```
 
 dowait方法中每次都将count减1，减完后立马进行判断看看是否等于0
-1. 如果等于0的话就会先去执行之前指定好的任务，执行完之后再调用nextGeneration方法将栅栏转到下一代，在该方法中会将所有线程唤醒，将计数器的值重新设为parties
-，最后会重新设置栅栏代次。
-2. 如果计数器此时还不等于0的话就进入for循环，根据参数来决定是调用trip.awaitNanos(nanos)还是trip.await()
-方法，这两方法对应着定时和非定时等待。如果在等待过程中当前线程被中断就会执行breakBarrier方法，该方法叫做打破栅栏，意味着游戏在中途被掐断，设置generation的broken状态为true并唤醒所有线程。同时这也说明在等待过程中有一个线程被中断整盘游戏就结束，所有之前被阻塞的线程都会被唤醒。
+1. 如果等于0的话就会先去执行之前指定好的任务，执行完之后再调用nextGeneration方法将栅栏转到下一代，在该方法中会将所有线程唤醒，将计数器的值重新设为parties，最后会重新设置栅栏代次。
+2. 如果不等于0的话就进入for循环，根据参数来决定是调用trip.awaitNanos(nanos)还是trip.await()方法，这两方法对应着定时和非定时等待。如果在等待过程中当前线程被中断就会执行breakBarrier方法，该方法叫做打破栅栏，意味着游戏在中途被掐断，设置generation的broken状态为true并唤醒所有线程。同时这也说明在等待过程中有一个线程被中断整盘游戏就结束，所有之前被阻塞的线程都会被唤醒。
 
 
 
