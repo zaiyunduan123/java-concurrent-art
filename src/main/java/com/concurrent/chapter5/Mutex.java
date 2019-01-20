@@ -9,7 +9,8 @@ import java.util.concurrent.locks.Condition;
  * @Date: 2019/1/8 14:58
  * @Description: 自定义同步器-独占锁
  * <p>
- *
+ * 同步器自身没有实现任何接口，仅仅是定义了若干同步状态获取和释放的方法来供自定义同步组件使用
+ * 同步器可以支持独占地获取同步状态，也可以支持共享式获取同步状态
  */
 public class Mutex {
     //静态内部类，自定义同步器
@@ -18,7 +19,7 @@ public class Mutex {
         // 当状态为0的时候获取锁
         @Override
         protected boolean tryAcquire(int arg) {
-            if (compareAndSetState(0, 1)) {
+            if (compareAndSetState(0, 1)) {//使用CAS设置当前状态，保证状态设置的原子性
                 setExclusiveOwnerThread(Thread.currentThread());
                 return true;
             }
@@ -32,7 +33,7 @@ public class Mutex {
                 throw new IllegalMonitorStateException();
             }
             setExclusiveOwnerThread(null);
-            setState(0);
+            setState(0);//  设置当前同步状态
             return true;
         }
 
@@ -48,7 +49,7 @@ public class Mutex {
         }
     }
 
-    // 仅需要将操作代理到Sync上即可
+    // 仅需要将操作代理到自定义同步器上即可
     private final Sync sync = new Sync();
 
     public void lock() {
