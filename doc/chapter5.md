@@ -1,4 +1,23 @@
-# 第五章、Java中的锁
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [5、Java中的锁](#5java%E4%B8%AD%E7%9A%84%E9%94%81)
+  - [Lock接口](#lock%E6%8E%A5%E5%8F%A3)
+    - [Lock接口提供的synchronized所不具备的主要特性](#lock%E6%8E%A5%E5%8F%A3%E6%8F%90%E4%BE%9B%E7%9A%84synchronized%E6%89%80%E4%B8%8D%E5%85%B7%E5%A4%87%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7)
+  - [队列同步器](#%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8)
+    - [同步队列的结构](#%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97%E7%9A%84%E7%BB%93%E6%9E%84)
+    - [同步状态的获取](#%E5%90%8C%E6%AD%A5%E7%8A%B6%E6%80%81%E7%9A%84%E8%8E%B7%E5%8F%96)
+  - [重入锁](#%E9%87%8D%E5%85%A5%E9%94%81)
+    - [ReentrantLock的非公平锁](#reentrantlock%E7%9A%84%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81)
+    - [ReentrantLock的公平锁](#reentrantlock%E7%9A%84%E5%85%AC%E5%B9%B3%E9%94%81)
+  - [读写锁 ReentrantReadWriteLock](#%E8%AF%BB%E5%86%99%E9%94%81-reentrantreadwritelock)
+  - [LockSupport工具](#locksupport%E5%B7%A5%E5%85%B7)
+  - [Condition接口](#condition%E6%8E%A5%E5%8F%A3)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# 5、Java中的锁
 
 ## Lock接口
 ### Lock接口提供的synchronized所不具备的主要特性
@@ -17,22 +36,22 @@
 
 节点是构成同步队列的基础，同步器拥有首节点和尾节点，没有成功获取同步状态的线程会成为节点加入该队列的尾部，其结构如下图所示
 
-![](5-1.jpeg)
+![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/5-1.jpeg)
 
 同步器包含了两个节点类型的引用，一个指向头节点，而另一个指向尾节点。
 
 如果一个线程没有获得同步队列，那么包装它的节点将被加入到队尾，显然这个过程应该是线程安全的。因此同步器提供了一个基于CAS的设置尾节点的方法：compareAndSetTail(Node expect,Node update),它需要传递一个它认为的尾节点和当前节点，只有设置成功，当前节点才被加入队尾。这个过程如下所示
 
-![](5-2.jpeg)
+![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/5-2.jpeg)
 
 同步队列遵循FIFO，首节点是获取同步状态成功的节点，首节点线程在释放同步状态时，将会唤醒后继节点，而后继节点将会在获取同步状态成功时将自己设置为首节点，这一过程如下：
 
-![](5-3.jpeg)
+![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/5-3.jpeg)
 
 ### 同步状态的获取
 下图描述了节点自旋获取同步状态的情况
-![](5-4.jpeg)
-![](5-5.jpeg)
+![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/5-4.jpeg)
+![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/5-5.jpeg)
 
 ## 重入锁
 

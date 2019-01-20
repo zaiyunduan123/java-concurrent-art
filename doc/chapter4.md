@@ -1,4 +1,15 @@
-# 第四章、Java并发编程基础
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [4、Java并发编程基础](#4java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80)
+  - [启动和终止线程](#%E5%90%AF%E5%8A%A8%E5%92%8C%E7%BB%88%E6%AD%A2%E7%BA%BF%E7%A8%8B)
+    - [关于InterruptedException异常](#%E5%85%B3%E4%BA%8Einterruptedexception%E5%BC%82%E5%B8%B8)
+    - [interrupt、isInterrupted和interrupted三种方法区别：](#interruptisinterrupted%E5%92%8Cinterrupted%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8C%BA%E5%88%AB)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# 4、Java并发编程基础
 
 ## 启动和终止线程
 ### 关于InterruptedException异常

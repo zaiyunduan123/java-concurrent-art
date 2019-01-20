@@ -1,4 +1,16 @@
-# 第七章、Java中的13个原子操作类
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [7、Java中的13个原子操作类](#7java%E4%B8%AD%E7%9A%8413%E4%B8%AA%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%B1%BB)
+  - [原子更新基本类型](#%E5%8E%9F%E5%AD%90%E6%9B%B4%E6%96%B0%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B)
+  - [原子更新数组](#%E5%8E%9F%E5%AD%90%E6%9B%B4%E6%96%B0%E6%95%B0%E7%BB%84)
+  - [原子更新引用类型](#%E5%8E%9F%E5%AD%90%E6%9B%B4%E6%96%B0%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B)
+  - [原子更新字段类](#%E5%8E%9F%E5%AD%90%E6%9B%B4%E6%96%B0%E5%AD%97%E6%AE%B5%E7%B1%BB)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# 7、Java中的13个原子操作类
 
 ## 原子更新基本类型
 
@@ -65,3 +77,17 @@ public class AtomicIntegerArrayTest {
 }
 ```
 需要注意的是，数组value通过构造方法传递进去，然后AtomicIntegerArray会将当前数组复制一份，所以当AtomicIntegerArray对内部的数组元素进行修改时，不会影响传入的数组。
+
+
+## 原子更新引用类型
+原子更新基本类型的AtomicInteger只能更新一个变量，如果要原子更新多个变量，就需要使用原子更新引用类型提供的类了。原子引用类型atomic包主要提供了以下几个类：
+1. AtomicReference：原子更新引用类型
+2. AtomicReferenceFieldUpdater：原子更新引用类型里的字段
+3. AtomicMarkableReference：原子更新带有标记位的引用类型。可以原子更新一个布尔类型的标记位和引用类型。构造方法是AtomicMarkableReference（V 
+initialRef，booleaninitialMark）
+
+## 原子更新字段类
+如果需要原子更新某个对象的某个字段，就需要使用原子更新属性的相关类，atomic中提供了一下几个类用于原子更新属性：
+1. tomicIntegerFieldUpdater：原子更新整形属性的更新器
+2. AtomicLongFieldUpdater：原子更新长整形的更新器
+3. AtomicStampedReference：原子更新带有版本号的引用类型。该类将整数值与引用关联起来，可用于原子的更新数据和数据的版本号，可以解决使用CAS进行原子更新时可能出现的ABA问题。
