@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [7、Java中的13个原子操作类](#7java%E4%B8%AD%E7%9A%8413%E4%B8%AA%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%B1%BB)
+- [第7章 Java中的13个原子操作类](#%E7%AC%AC7%E7%AB%A0-java%E4%B8%AD%E7%9A%8413%E4%B8%AA%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%B1%BB)
   - [原子更新基本类型](#%E5%8E%9F%E5%AD%90%E6%9B%B4%E6%96%B0%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B)
   - [原子更新数组](#%E5%8E%9F%E5%AD%90%E6%9B%B4%E6%96%B0%E6%95%B0%E7%BB%84)
   - [原子更新引用类型](#%E5%8E%9F%E5%AD%90%E6%9B%B4%E6%96%B0%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B)
@@ -10,7 +10,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# 7、Java中的13个原子操作类
+# 第7章 Java中的13个原子操作类
 
 ![](https://github.com/zaiyunduan123/java-concurrent-art/blob/master/image/7-1.png)
 

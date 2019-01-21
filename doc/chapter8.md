@@ -2,8 +2,8 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [8、Java中的并发工具类](#8java%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB)
-  - [等待多线程完成的CountDownLatch](#%E7%AD%89%E5%BE%85%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%8C%E6%88%90%E7%9A%84countdownlatch)
+- [第8章 Java中的并发工具类](#%E7%AC%AC8%E7%AB%A0-java%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB)
+  - [等待多线程完成CountDownLatch](#%E7%AD%89%E5%BE%85%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%8C%E6%88%90countdownlatch)
     - [用法](#%E7%94%A8%E6%B3%95)
     - [原理](#%E5%8E%9F%E7%90%86)
       - [初始化](#%E5%88%9D%E5%A7%8B%E5%8C%96)
@@ -18,7 +18,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# 8、Java中的并发工具类
+# 第8章 Java中的并发工具类
 
 ## 等待多线程完成CountDownLatch
 CountDownLatch这个类，作用感觉和join很像，首先来看一下join，join用于让当前执行线程等待join线程执行结束，其实现原理是不停检查join线程是否存活，如果join线程存活则让当前线程永远等待。

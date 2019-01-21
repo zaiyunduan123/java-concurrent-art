@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [1、Java并发机制的底层实现原理](#1java%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
+- [第1章 并发编程的挑战](#%E7%AC%AC1%E7%AB%A0-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E6%8C%91%E6%88%98)
   - [上下文切换](#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2)
     - [如何减少上下文切换](#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2)
   - [死锁](#%E6%AD%BB%E9%94%81)
@@ -10,7 +10,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# 1、并发编程的挑战
+# 第1章 并发编程的挑战
 
 ## 上下文切换
 ### 如何减少上下文切换

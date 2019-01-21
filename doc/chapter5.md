@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [5、Java中的锁](#5java%E4%B8%AD%E7%9A%84%E9%94%81)
+- [第5章 Java中的锁](#%E7%AC%AC5%E7%AB%A0-java%E4%B8%AD%E7%9A%84%E9%94%81)
   - [Lock接口](#lock%E6%8E%A5%E5%8F%A3)
     - [Lock接口提供的synchronized所不具备的主要特性](#lock%E6%8E%A5%E5%8F%A3%E6%8F%90%E4%BE%9B%E7%9A%84synchronized%E6%89%80%E4%B8%8D%E5%85%B7%E5%A4%87%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7)
   - [队列同步器](#%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8)
@@ -17,7 +17,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# 5、Java中的锁
+# 第5章 Java中的锁
 
 ## Lock接口
 ### Lock接口提供的synchronized所不具备的主要特性
