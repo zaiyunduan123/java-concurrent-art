@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [第6章 Java并发容器和框架](#%E7%AC%AC6%E7%AB%A0-java%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E5%92%8C%E6%A1%86%E6%9E%B6)
+  - [Java中的阻塞队列](#java%E4%B8%AD%E7%9A%84%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97)
+    - [ArrayBlockingQueue](#arrayblockingqueue)
+    - [LinkedBlockingQueue](#linkedblockingqueue)
+    - [PriorityBlockingQueue](#priorityblockingqueue)
+    - [DelayQueue](#delayqueue)
+      - [如何实现 Delayed 接口](#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-delayed-%E6%8E%A5%E5%8F%A3)
+      - [如何实现延时队列](#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BB%B6%E6%97%B6%E9%98%9F%E5%88%97)
+    - [SynchronousQueue](#synchronousqueue)
+    - [LinkedTransferQueue](#linkedtransferqueue)
+    - [LinkedBlockingDeque](#linkedblockingdeque)
+    - [实现原理](#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 
 # 第6章 Java并发容器和框架

@@ -12,9 +12,8 @@
   - [原子操作](#%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C)
     - [处理器如何实现原子操作](#%E5%A4%84%E7%90%86%E5%99%A8%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C)
     - [JAVA如何实现原子操作](#java%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C)
-    - [循环CAS](#%E5%BE%AA%E7%8E%AFcas)
-      - [CAS实现原子操作的三大问题](#cas%E5%AE%9E%E7%8E%B0%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E4%B8%89%E5%A4%A7%E9%97%AE%E9%A2%98)
-    - [锁](#%E9%94%81)
+      - [循环CAS](#%E5%BE%AA%E7%8E%AFcas)
+      - [锁](#%E9%94%81)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -159,14 +158,15 @@ synchronized使用的锁信息都放在对象头里，JVM中用2个字节来储�
 
 Java中主要通过下面两种方式来实现原子操作：锁和循环CAS
 
-### 循环CAS
+#### 循环CAS
 CAS全称Compare-and-Swap（比较并交换），JVM中的CAS操作是依赖处理器提供的cmpxchg指令完成的，CAS指令中有3个操作数，分别是内存位置V、旧的预期值A和新值B
 
 当CAS指令执行时，当且仅当内存位置V符合旧预期值时A时，处理器才会用新值B去更新V的值，否则就不执行更新，但是无论是否更新V，都会返回V的旧值，该操作过程就是一个原子操作
 
 JDK1.5之后才可以使用CAS，由sun.misc.Unsafe类里面的compareAndSwapInt()和compareAndSwapLong()等方法包装实现，虚拟机在即时编译时，对这些方法做了特殊处理，会编译出一条相关的处理器CAS指令
 
-#### CAS实现原子操作的三大问题
+**CAS实现原子操作的三大问题**
+ 
 **1、ABA问题**：初次读取内存旧值时是A，再次检查之前这段期间，如果内存位置的值发生过从A变成B再变回A的过程，我们就会错误的检查到旧值还是A，认为没有发生变化，其实已经发生过A-B-A得变化，这就是CAS操作的ABA问题
 
 解决方法：使用版本号，即1A-2B-3A，这样就会发现1A到3A的变化，不存在ABA变化无感知问题，JDK的atomic包中提供一个带有标记的原子引用类AtomicStampedReference来解决ABA问题
@@ -179,7 +179,7 @@ JDK1.5之后才可以使用CAS，由sun.misc.Unsafe类里面的compareAndSwapInt
 - 将多个变量组合成一个共享变量，jdk提供了AtomicReference类来保证引用对象之间的原子性，那么就可以把多个变量放在一个对象里来进行CAS操作
 - 使用锁
 
-### 锁
+#### 锁
 
 锁机制保证了只有获得锁的线程才能够操作锁定的内存区域。JVM内部实现了很多锁机制，有偏向锁、轻量级锁和互斥锁。除了偏向锁，JVM实现锁的方式都用了循环CAS，即当一个线程想进入同步块的时候使用循环CAS的方式来获取锁，当它退出同步块的时候使用循环CAS释放锁。
 
