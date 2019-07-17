@@ -201,21 +201,29 @@ dowait方法中每次都将count减1，减完后立马进行判断看看是否�
 
 
 
-
-
-
 ### CyclicBarrier和CountDownLatch的区别
-1. CyclicBarrier的计数器由自己控制，而CountDownLatch的计数器则由使用者来控制，在CyclicBarrier中线程调用await方法不仅会将自己阻塞还会将计数器减1，而在CountDownLatch
-中线程调用await方法只是将自己阻塞而不会减少计数器的值。
-2. CountDownLatch的计数器只能使用一次，而CyclicBarrier的计数器可以使用reset()
-方法重置。所以CyclicBarrier能处理更为复杂的业务场景。例如，如果计算发生错误，可以重置计数器，并让线程重新执行一次。
-3. CyclicBarrier还提供其他有用的方法，比如getNumberWaiting方法可以获得Cyclic-Barrier阻塞的线程数量。isBroken()方法用来了解阻塞的线程是否被中断
+#### 定义和特点
+- CountDownLatch，允许一个或多个线程等待其他线程完成操作，首先初始化一个计数值N，然后通过调用 await可以让当前线程阻塞，直到计数值N在被调用N次countDown置为0后，再继续执行。
+- CyclicBarrier ，见名知意，是一个可以循环使用（Cyclic）的屏障（Barrier），让一组线程到达一个屏障时被阻塞，直到最后一个线程到达屏障时，屏障才会打开，所有被屏障拦截的线程才继续工作。
+
+#### 实现原理
+- CountDownLatch ：同步功能是基于 AQS 实现的，CountDownLatch 使用 AQS 中的 state 成员变量作为计数器，在 state 不为0的情况下，凡是调用 await 方法的线程将会被阻塞，并被放入 AQS 所维护的同步队列中进行等待。
+- CyclicBarrier ：基于重入锁 ReentrantLock 实现，线程调用 await 方法需要先获取锁才能访问。在最后一个线程访问 await 方法前，其他线程进入 await 方法中后，会调用 Condition 的 await 方法进入等待状态；在最后一个线程进入 CyclicBarrier的 await 方法后，该线程将会调用 Condition 的 signalAll 方法唤醒所有处于等待状态中的线程；最后一个进入 await 的线程还会重置 CyclicBarrier 的状态，使其可以重复使用。
+
+#### 适用场景
+- CountDownLatch ：一个线程需要等待其它线程完成操作后，才能进行后续的操作、
+- CyclicBarrier ：需要所有的子任务都完成时，才执行主任务。
+
+#### 计数方式
+CountDownLatch：减计数方式；计数为0的时候释放所有等待的线程；计数为0时，无法重置，只能使用一次；调用countDown方法减一，await方法阻塞。
+CyclicBarrier：加计数方式；计数达到指定值时释放所有等待线程；计数达到指定值时，计数置为0，重新开始；可重复使用。
 
 ## 控制并发线程数的Semaphore
 
 Semaphore（信号量）是用来控制同时访问特定资源的线程数量，它通过协调各个线程，以保证合理的使用公共资源。
 
 Semaphore可以用于做流量控制，特别是公用资源有限的应用场景，比如数据库连接。假如有一个需求，要读取几万个文件的数据，因为都是IO密集型任务，我们可以启动几十个线程并发地读取，但是如果读到内存后，还需要存储到数据库中，而数据库的连接数只有10个，这时我们必须控制只有10个线程同时获取数据库连接保存数据，否则会报错无法获取数据库连接。这个时候，就可以使用Semaphore来做流量控制
+
 ```java
 
 public class SemaphoreTest { 
